@@ -1,0 +1,6 @@
+#!/bin/bash
+# Create a crontab like this, to run every day at 6am,
+# to run your version of this shell scipt
+# 
+# 0 6 * * * /path/to/daily.sh
+/path/to/virtualenvs/virtualenv-name/bin/python /path/to/wotd-inky/app.py
