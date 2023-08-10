@@ -95,19 +95,22 @@ def main():
     data = json.loads(wotd_json)
 
     # Use a template to convert the json to a minimal semantic webpage (with styling)
-    loader=jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates'))
+    cwd = os.path.dirname(os.path.abspath(__file__))
+    loader = jinja2.FileSystemLoader(os.path.join(cwd, 'templates'))
     env = jinja2.Environment(loader=loader)
     template = env.get_template('wotd.html')
     html = template.render(data=data)
 
     # Save webpage to file
-    page = open(r'wotd.html', 'w')
+    page = open((os.path.join(cwd, 'wotd.html')), 'w')
     page.write(html)
     page.close()
 
     # Save html as an image
+    image_path = os.path.join(cwd, 'wotd.png')
     hti = Html2Image(
-        custom_flags=['--disable-gpu']
+        custom_flags=['--disable-gpu'],
+        output_path = cwd
     )
     hti.screenshot(
         html_str=html,
@@ -116,7 +119,7 @@ def main():
     )
 
     # Display the image on the eInk
-    img_png = Image.open('wotd.png').resize((400, 300))
+    img_png = Image.open(image_path).resize((400, 300))
     inky_show(img_png)
 
 main()
