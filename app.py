@@ -99,12 +99,12 @@ def main():
     loader = jinja2.FileSystemLoader(os.path.join(cwd, 'templates'))
     env = jinja2.Environment(loader=loader)
     template = env.get_template('wotd.html')
-    html = template.render(data=data)
+    html = template.render(data=data["1"])
 
-    # Save webpage to file
-    page = open((os.path.join(cwd, 'wotd.html')), 'w')
-    page.write(html)
-    page.close()
+    # Optionally save webpage to file
+    # page = open((os.path.join(cwd, 'wotd.html')), 'w')
+    # page.write(html)
+    # page.close()
 
     # Save html as an image
     image_path = os.path.join(cwd, 'wotd.png')
